@@ -20,7 +20,9 @@ const Aside = styled.aside`
 
 const Main = styled.main`
   width: calc(100vw - ${layoutTheme.asideWidth});
-  height: calc(100vh - ${layoutTheme.headerHeight} - ${layoutTheme.footerHeight});
+  height: calc(
+    100vh - ${layoutTheme.headerHeight} - ${layoutTheme.footerHeight}
+  );
   overflow-y: auto;
   background-color: ${layoutTheme.yellow};
 `
@@ -31,7 +33,7 @@ const Footer = styled.footer`
   background-color: ${layoutTheme.green};
 `
 
-export default function GridLayout () {
+export default function GridLayout() {
   return (
     <Layout>
       <Header>Header</Header>

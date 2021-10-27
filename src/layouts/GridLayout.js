@@ -3,7 +3,7 @@ import layoutTheme from './../themes/layoutTheme'
 
 const Layout = styled.div`
   display: grid;
-  grid-template-areas: 
+  grid-template-areas:
     'header header'
     'aside main'
     'footer footer';
@@ -34,7 +34,7 @@ const Footer = styled.footer`
   background-color: ${layoutTheme.green};
 `
 
-export default function GridLayout () {
+export default function GridLayout() {
   return (
     <Layout>
       <Header>Header</Header>
