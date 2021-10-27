@@ -33,13 +33,13 @@ const Footer = styled.footer`
   background-color: ${layoutTheme.green};
 `
 
-export default function GridLayout() {
+export default function GridLayout({ header, aside, main, footer }) {
   return (
     <Layout>
-      <Header>Header</Header>
-      <Aside>Aside</Aside>
-      <Main>Main</Main>
-      <Footer>Footer</Footer>
+      <Header>{header}</Header>
+      <Aside>{aside}</Aside>
+      <Main>{main}</Main>
+      <Footer>{footer}</Footer>
     </Layout>
   )
 }
