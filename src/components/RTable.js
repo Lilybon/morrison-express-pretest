@@ -29,12 +29,32 @@ const Table = styled.table`
     }
   }
 `
-// TODO: try using config props to generate template and custom column cell
-export default function RTable({ head, body }) {
+
+export default function RTable({ columns, data }) {
   return (
     <Table>
-      <thead>{head}</thead>
-      <tbody>{body}</tbody>
+      <thead>
+        <tr>
+          {columns.map((column, columnIndex) => (
+            <th key={`th-${columnIndex}`} style={{ width: column.width }}>
+              {column.label}
+            </th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {data.map((row, rowIndex) => (
+          <tr key={`tr-${rowIndex}`}>
+            {columns.map((column, columnIndex) => (
+              <td key={`td-${rowIndex}-${columnIndex}`}>
+                {typeof column.render === 'function'
+                  ? column.render(row)
+                  : row[column.prop]}
+              </td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
     </Table>
   )
 }

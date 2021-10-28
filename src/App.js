@@ -19,11 +19,146 @@ const SectionTitle = styled.h3`
 `
 
 function App() {
-  const options = Array.from(Array(13), (_, index) => ({
+  const answer2Columns = [
+    {
+      type: 'checkbox',
+    },
+    {},
+    {
+      label: 'status',
+      prop: 'label',
+      width: 150,
+    },
+  ]
+  const answer2Data = Array.from(Array(13), (_, index) => ({
     label: index.toString().padStart(2, 0) + ' - unassigned',
     value: index,
     disabled: !!Math.round(Math.random()),
   }))
+
+  const answer3Columns = [
+    {
+      label: 'method',
+      prop: 'method',
+      width: 100,
+    },
+    {
+      label: 'idempotence',
+      prop: 'idempotence',
+      width: 20,
+    },
+    {
+      label: 'safety',
+      prop: 'safety',
+      width: 20,
+    },
+    {
+      label: 'params',
+      prop: 'params',
+      width: 200,
+    },
+    {
+      label: 'description',
+      width: 200,
+      render: (cell) => cell.description(),
+    },
+  ]
+
+  const answer3Data = [
+    {
+      method: 'GET',
+      idempotence: 'yes',
+      safety: 'yes',
+      params: 'URL query parameters',
+      description: () => (
+        <>
+          <p>Search an instance or instances by conditions.</p>
+          <br />
+          <pre>
+            books/{'\n'}
+            books/?title_q=cat{'\n'}
+            books/?title=cat%20walk{'\n'}
+            books/:id/{'\n'}
+          </pre>
+        </>
+      ),
+    },
+    {
+      method: 'HEAD',
+      idempotence: 'yes',
+      safety: 'yes',
+      params: 'URL query parameters',
+      description: () => (
+        <p>
+          Same as GET, but it only requests for header, not content. For
+          example, you can access file size without actually downloading file.
+        </p>
+      ),
+    },
+    {
+      method: 'POST',
+      idempotence: 'no',
+      safety: 'no',
+      params: 'Request body',
+      description: () => (
+        <>
+          <p>Create an instance.</p>
+          <br />
+          <pre>
+            books/{'\n'}
+            {'{"title": "cat walk", "author": "lilybon"}'}
+          </pre>
+        </>
+      ),
+    },
+    {
+      method: 'PUT',
+      idempotence: 'yes',
+      safety: 'no',
+      params: 'Request body',
+      description: () => (
+        <>
+          <p>Replace all properties of an instance.</p>
+          <br />
+          <pre>
+            books/:id/{'\n'}
+            {'{"title": "cat run", "author": "lilybon"}'}
+          </pre>
+        </>
+      ),
+    },
+    {
+      method: 'PATCH',
+      idempotence: 'no',
+      safety: 'no',
+      params: 'Request body',
+      description: () => (
+        <>
+          <p>Update partial properties of an instance.</p>
+          <br />
+          <pre>
+            books/:id/{'\n'}
+            {'{"title": "cat run"}'}
+          </pre>
+        </>
+      ),
+    },
+    {
+      method: 'DELETE',
+      idempotence: 'yes',
+      safety: 'no',
+      params: 'Request body',
+      description: () => 'books/:id/',
+    },
+    {
+      method: 'OPTIONS',
+      idempotence: 'yes',
+      safety: 'yes',
+      params: '-',
+      description: () =>
+        'Commonly, it comes up by CORS case, client will send a safe preflight request before sending actual request. It gives server a chance to examine what the actual request will look like before it make.',
+    },
+  ]
   return (
     // <FlexLayout />
     <GridLayout
@@ -31,138 +166,13 @@ function App() {
         <ContentWrapper>
           <Section>
             <SectionTitle>ans 2. checkboxes</SectionTitle>
-            <RTable
-              head={
-                <tr>
-                  <th>
-                    <input type="checkbox" value=""></input>
-                  </th>
-                  <th width={10}></th>
-                  <th>status</th>
-                </tr>
-              }
-              body={options.map((option) => (
-                <tr key={option.value}>
-                  <td>
-                    {!option.disabled && (
-                      <input type="checkbox" value={option.value} />
-                    )}
-                  </td>
-                  <td></td>
-                  <td>{option.label}</td>
-                </tr>
-              ))}
-            />
+            <RTable columns={answer2Columns} data={answer2Data} />
           </Section>
           <Section>
             <SectionTitle>
               ans 3. common CRUD APIs and their specification
             </SectionTitle>
-            <RTable
-              head={
-                <tr>
-                  <th>method</th>
-                  <th>idempotence</th>
-                  <th>safety</th>
-                  <th>params</th>
-                  <th>description</th>
-                </tr>
-              }
-              body={
-                <>
-                  <tr>
-                    <td>GET</td>
-                    <td>yes</td>
-                    <td>yes</td>
-                    <td>URL query parameters</td>
-                    <td width={'200px'}>
-                      <p>Search an instance or instances by conditions.</p>
-                      <br />
-                      <pre>
-                        books/{'\n'}
-                        books/?title_q=cat{'\n'}
-                        books/?title=cat%20walk{'\n'}
-                        books/:id/{'\n'}
-                      </pre>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>HEAD</td>
-                    <td>yes</td>
-                    <td>yes</td>
-                    <td>URL query parameters</td>
-                    <td width={'200px'}>
-                      <p>
-                        Same as GET, but it only requests for header, not
-                        content. For example, you can access file size without
-                        actually downloading file.
-                      </p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>POST</td>
-                    <td>no</td>
-                    <td>no</td>
-                    <td>Request body</td>
-                    <td>
-                      <p>Create an instance.</p>
-                      <br />
-                      <pre>
-                        books/{'\n'}
-                        {'{"title": "cat walk", "author": "lilybon"}'}
-                      </pre>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>PUT</td>
-                    <td>yes</td>
-                    <td>no</td>
-                    <td>Request body</td>
-                    <td>
-                      <p>Replace all properties of an instance.</p>
-                      <br />
-                      <pre>
-                        books/:id/{'\n'}
-                        {'{"title": "cat run", "author": "lilybon"}'}
-                      </pre>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>PATCH</td>
-                    <td>no</td>
-                    <td>no</td>
-                    <td>Request body</td>
-                    <td>
-                      <p>Update partial properties of an instance.</p>
-                      <br />
-                      <pre>
-                        books/:id/{'\n'}
-                        {'{"title": "cat run"}'}
-                      </pre>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>DELETE</td>
-                    <td>yes</td>
-                    <td>no</td>
-                    <td>Request body</td>
-                    <td>books/:id/</td>
-                  </tr>
-                  <tr>
-                    <td>OPTIONS</td>
-                    <td>yes</td>
-                    <td>yes</td>
-                    <td>-</td>
-                    <td>
-                      Commonly, it comes up by CORS case, client will send a
-                      safe preflight request before sending actual request. It
-                      gives server a chance to examine what the actual request
-                      will look like before it make.
-                    </td>
-                  </tr>
-                </>
-              }
-            />
+            <RTable columns={answer3Columns} data={answer3Data} />
           </Section>
         </ContentWrapper>
       }
