@@ -3,7 +3,7 @@ import useKeyPress from './useKeyPress'
 import uniqBy from './../utils/uniqBy'
 
 const useCheckBoxes = (checkBoxes = []) => {
-  const allSelections = checkBoxes.filter((checkbox) => !checkbox.disabled)
+  const allSelections = checkBoxes.filter((checkBox) => !checkBox.disabled)
   const [isAllSelected, setIsAllSelected] = useState(false)
   const [selections, setSelections] = useState([])
   const [lastSelection, setLastSelection] = useState(null)

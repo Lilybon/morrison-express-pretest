@@ -51,5 +51,8 @@
     "src/**/*.{js,jsx,json,md}": [
       "prettier --write"
     ]
+  },
+  "devDependencies": {
+    "@testing-library/react-hooks": "^7.0.2"
   }
 }
