@@ -1,6 +1,6 @@
 # Morrison Express Pretest
 
-You can view online demo at ease on [here](xxx).
+You can view online demo at ease on [here](https://condescending-curie-7c6747.netlify.app/).
 ## Features
 
 1. hooks such as event binding and checkboxes
