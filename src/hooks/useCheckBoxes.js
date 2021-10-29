@@ -20,15 +20,25 @@ const useCheckBoxes = (checkBoxes = []) => {
       const targetIndex = allSelections.findIndex(
         (selection) => selection.value === target.value
       )
-      const lastSelectionIndex = allSelections.findIndex(
-        (selection) => selection.value === lastSelection.value
-      )
+      const lastSelectionIndex = lastSelection
+        ? allSelections.findIndex(
+            (selection) => selection.value === lastSelection.value
+          )
+        : 0
       const newSelections = allSelections.slice(
         Math.min(targetIndex, lastSelectionIndex),
         Math.max(targetIndex, lastSelectionIndex) + 1
       )
-      // TODO: handle unchecked by range
-      return uniqBy([...selections, ...newSelections], (item) => item.value)
+      if (isSelectionChecked(target)) {
+        return selections.filter(
+          (selection) =>
+            !newSelections.some(
+              (newSelection) => newSelection.value === selection.value
+            )
+        )
+      } else {
+        return uniqBy([...selections, ...newSelections], (item) => item.value)
+      }
     }
     if (isSelectionChecked(target)) {
       return selections.filter((selection) => selection.value !== target.value)
