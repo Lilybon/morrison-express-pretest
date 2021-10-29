@@ -8,7 +8,6 @@ const uniqBy = (array, iteratee) => {
       results.push(value)
     }
   }
-  console.log(results)
   return results
 }
 
