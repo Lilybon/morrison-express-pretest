@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import useCheckBoxes from './../hooks/useCheckBoxes'
 
 const borderColor = '#9f9f9f'
 
@@ -16,43 +17,69 @@ const Table = styled.table`
       border-right: 0;
     }
   }
-  thead tr {
-    font-weight: bold;
-    background-color: #a8c3ff;
+`
+
+const TableHeaderRow = styled.tr`
+  font-weight: bold;
+  background-color: #a8c3ff;
+`
+
+const TableBodyRow = styled.tr`
+  :nth-child(odd) {
+    background-color: #edf1ff;
   }
-  tbody tr {
-    :nth-child(odd) {
-      background-color: #edf1ff;
-    }
-    :nth-child(even) {
-      background-color: #ffffff;
-    }
+  :nth-child(even) {
+    background-color: #ffffff;
   }
 `
 
 export default function RTable({ columns, data }) {
+  const {
+    isAllSelected,
+    isSelectionChecked,
+    handleSelectAll,
+    handleSelectSingle,
+  } = useCheckBoxes(data)
+
   return (
     <Table>
       <thead>
-        <tr>
+        <TableHeaderRow>
           {columns.map((column, columnIndex) => (
             <th key={`th-${columnIndex}`} style={{ width: column.width }}>
-              {column.label}
+              {column.type === 'checkbox' ? (
+                <input
+                  type="checkbox"
+                  checked={isAllSelected}
+                  onChange={() => handleSelectAll()}
+                />
+              ) : (
+                column.label
+              )}
             </th>
           ))}
-        </tr>
+        </TableHeaderRow>
       </thead>
       <tbody>
         {data.map((row, rowIndex) => (
-          <tr key={`tr-${rowIndex}`}>
+          <TableBodyRow key={`tr-${rowIndex}`}>
             {columns.map((column, columnIndex) => (
               <td key={`td-${rowIndex}-${columnIndex}`}>
-                {typeof column.render === 'function'
-                  ? column.render(row)
-                  : row[column.prop]}
+                {column.type === 'checkbox' && !row.disabled ? (
+                  <input
+                    type="checkbox"
+                    value={row.value}
+                    checked={isSelectionChecked(row)}
+                    onChange={() => handleSelectSingle(row)}
+                  />
+                ) : typeof column.render === 'function' ? (
+                  column.render(row)
+                ) : (
+                  row[column.prop]
+                )}
               </td>
             ))}
-          </tr>
+          </TableBodyRow>
         ))}
       </tbody>
     </Table>

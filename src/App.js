@@ -16,6 +16,7 @@ const SectionTitle = styled.h3`
   font-size: 24px;
   font-weight: bold;
   text-transform: capitalize;
+  color: #bf7f2f;
 `
 
 function App() {
@@ -165,12 +166,16 @@ function App() {
       main={
         <ContentWrapper>
           <Section>
-            <SectionTitle>ans 2. checkboxes</SectionTitle>
+            <SectionTitle>answer 1. layout</SectionTitle>
+            <p>Grid is great.</p>
+          </Section>
+          <Section>
+            <SectionTitle>answer 2. checkboxes</SectionTitle>
             <RTable columns={answer2Columns} data={answer2Data} />
           </Section>
           <Section>
             <SectionTitle>
-              ans 3. common CRUD APIs and their specification
+              answer 3. common CRUD APIs and their specification
             </SectionTitle>
             <RTable columns={answer3Columns} data={answer3Data} />
           </Section>
