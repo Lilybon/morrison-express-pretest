@@ -56,10 +56,10 @@ const useCheckBoxes = (checkBoxes = []) => {
     setSelections(newSelections)
     setLastSelection(target)
 
-    if (newSelections.length === 0) {
-      setIsAllSelected(false)
-    } else if (newSelections.length === allSelections.length) {
+    if (newSelections.length === allSelections.length) {
       setIsAllSelected(true)
+    } else {
+      setIsAllSelected(false)
     }
   }
 
