@@ -188,11 +188,7 @@ function App() {
           <Section>
             <SectionTitle>extra. play with react portal</SectionTitle>
             <button onClick={() => setIsVisible(true)}>Open dialog</button>
-            <Dialog
-              visible={isVisible}
-              onClose={() => setIsVisible(false)}
-              lockScroll={true}
-            >
+            <Dialog visible={isVisible} onClose={() => setIsVisible(false)}>
               <Dialog.Body>
                 <span>This is a message.</span>
               </Dialog.Body>

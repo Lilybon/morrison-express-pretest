@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import layoutTheme from './../themes/layoutTheme'
+import PropTypes from 'prop-types'
 
 const Layout = styled.div`
   display: grid;
@@ -34,7 +35,7 @@ const Footer = styled.footer`
   background-color: ${layoutTheme.green};
 `
 
-export default function GridLayout({ header, aside, main, footer }) {
+function GridLayout({ header, aside, main, footer }) {
   return (
     <Layout>
       <Header>{header}</Header>
@@ -44,3 +45,12 @@ export default function GridLayout({ header, aside, main, footer }) {
     </Layout>
   )
 }
+
+GridLayout.propTypes = {
+  header: PropTypes.node,
+  aside: PropTypes.node,
+  main: PropTypes.node,
+  footer: PropTypes.node,
+}
+
+export default GridLayout

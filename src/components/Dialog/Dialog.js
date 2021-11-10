@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import styled from 'styled-components'
 import ReactDOM from 'react-dom'
+import PropTypes from 'prop-types'
 
 const Overlay = styled.div`
   position: fixed;
@@ -26,7 +27,7 @@ const Modal = styled.div`
   background: #fff;
 `
 
-export default function Dialog({ visible, children, onClose, lockScroll }) {
+function Dialog({ visible, children, onClose, lockScroll = true }) {
   const [bodyOverflow, setBodyOverflow] = useState(null)
 
   useEffect(() => {
@@ -52,3 +53,12 @@ export default function Dialog({ visible, children, onClose, lockScroll }) {
     document.getElementById('portal')
   )
 }
+
+Dialog.propTypes = {
+  visible: PropTypes.bool.isRequired,
+  children: PropTypes.node.isRequired,
+  onClose: PropTypes.func.isRequired,
+  lockScroll: PropTypes.bool,
+}
+
+export default Dialog

@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import layoutTheme from './../themes/layoutTheme'
+import PropTypes from 'prop-types'
 
 const Layout = styled.div`
   display: flex;
@@ -33,7 +34,7 @@ const Footer = styled.footer`
   background-color: ${layoutTheme.green};
 `
 
-export default function GridLayout({ header, aside, main, footer }) {
+function FlexLayout({ header, aside, main, footer }) {
   return (
     <Layout>
       <Header>{header}</Header>
@@ -43,3 +44,12 @@ export default function GridLayout({ header, aside, main, footer }) {
     </Layout>
   )
 }
+
+FlexLayout.propTypes = {
+  header: PropTypes.node,
+  aside: PropTypes.node,
+  main: PropTypes.node,
+  footer: PropTypes.node,
+}
+
+export default FlexLayout

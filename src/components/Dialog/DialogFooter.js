@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
 let Footer = styled.div`
   padding: 10px 20px 15px;
@@ -6,6 +7,12 @@ let Footer = styled.div`
   box-sizing: border-box;
 `
 
-export default function DialogFooter({ children }) {
+function DialogFooter({ children }) {
   return <Footer>{children}</Footer>
 }
+
+DialogFooter.propTypes = {
+  children: PropTypes.node.isRequired,
+}
+
+export default DialogFooter

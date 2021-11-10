@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import useCheckBoxes from './../hooks/useCheckBoxes'
+import PropTypes from 'prop-types'
 
 const borderColor = '#9f9f9f'
 
@@ -33,7 +34,7 @@ const TableBodyRow = styled.tr`
   }
 `
 
-export default function RTable({ columns, data }) {
+function RTable({ columns, data }) {
   const {
     isAllSelected,
     isSelectionChecked,
@@ -85,3 +86,10 @@ export default function RTable({ columns, data }) {
     </Table>
   )
 }
+
+RTable.propTypes = {
+  columns: PropTypes.array.isRequired,
+  data: PropTypes.array.isRequired,
+}
+
+export default RTable
