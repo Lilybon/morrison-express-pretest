@@ -2,6 +2,8 @@
 import styled from 'styled-components'
 import GridLayout from './layouts/GridLayout'
 import RTable from './components/RTable'
+import Dialog from './components/Dialog'
+import { useState } from 'react'
 
 const ContentWrapper = styled.div`
   padding: 16px;
@@ -160,6 +162,8 @@ function App() {
         'Commonly, it comes up by CORS case, client will send a safe preflight request before sending actual request. It gives server a chance to examine what the actual request will look like before it make.',
     },
   ]
+
+  const [isVisible, setIsVisible] = useState(false)
   return (
     // <FlexLayout />
     <GridLayout
@@ -178,6 +182,22 @@ function App() {
               answer 3. common CRUD APIs and their specification
             </SectionTitle>
             <RTable columns={answer3Columns} data={answer3Data} />
+          </Section>
+          <Section>
+            <SectionTitle>extra. play with react portal</SectionTitle>
+            <button onClick={() => setIsVisible(true)}>Open dialog</button>
+            <Dialog
+              visible={isVisible}
+              onClose={() => setIsVisible(false)}
+              lockScroll={true}
+            >
+              <Dialog.Body>
+                <span>This is a message.</span>
+              </Dialog.Body>
+              <Dialog.Footer>
+                <button onClick={() => setIsVisible(false)}>Cancel</button>
+              </Dialog.Footer>
+            </Dialog>
           </Section>
         </ContentWrapper>
       }
