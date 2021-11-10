@@ -21,6 +21,12 @@ const SectionTitle = styled.h3`
   color: #bf7f2f;
 `
 
+const assignTasks = Array.from(Array(13), (_, index) => ({
+  label: index.toString().padStart(2, 0) + ' - unassigned',
+  value: index,
+  disabled: !!Math.round(Math.random()),
+}))
+
 function App() {
   const answer2Columns = [
     {
@@ -33,11 +39,7 @@ function App() {
       width: 150,
     },
   ]
-  const answer2Data = Array.from(Array(13), (_, index) => ({
-    label: index.toString().padStart(2, 0) + ' - unassigned',
-    value: index,
-    disabled: !!Math.round(Math.random()),
-  }))
+  const answer2Data = assignTasks
 
   const answer3Columns = [
     {
